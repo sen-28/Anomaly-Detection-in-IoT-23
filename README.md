@@ -76,8 +76,40 @@ It is observed that the outliers only exist in one column: '**orif_ip_bytes_df**
 
 ## Results
 
+### F-1 Score
 
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/f1.png)
 
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/time.png)
+
+**Random Forest Algorithm provides best results**. The Accuracy achieved by it is **74%** for the F-1 score. The next best algorithm is **Decision Tree** since it also takes considerably less amount of time to train and test (a mere **3.38 seconds**). 
+
+**Although MLP and CNN have managed to provide us with results that lie within the ballpark of the best results achieved by the computationally lighter ML models, they aren’t considered the optimum models to use because of their complex structure and construction.** 
+
+Similarly, even though SVM produces decent results, it takes a significant amount to train. Thus, it is not ideal for carrying out analysis on large datasets like the IoT-23 dataset (which has 15,00,000 rows). 
+
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/precision.png)
+
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/recall.png)
+
+## Analysis
+
+Since **Decision Trees** and **Random Forest** algorithms are based on the same base model, their results being in the proximate range isn’t surprising. 
+A possible explanation for this heightened performance could be attributed to the fact that some of the columns in the dataset are heavily correlated to the ‘label’ column. Hence, making simple assumptions is enough for correctly predicting the majority of classes. 
+
+The **AdaBoost** algorithm also provided decent results (**Accuracy: 65%**). This is because both AdaBoost and Random Forest algorithms use Decision trees as their meta classifier. 
+
+The reason why **Naive Bayes** performs badly is since not all columns in this dataset are independent. The poor results obtained by it are most likely a result of the data under consideration not being independent.
+
+We used two DL methods: **MLP** and **CNN**. Even though both these models produced decent results, they weren’t a big improvement on the less computationally expensive ML algorithms used. From looking at the confusion matrix obtained for these, it was clear that the models were showing a certain amount of bias towards the classes that had more occurrences.
+
+## Conclusion:
+
+**In conclusion, the Random Forest algorithm works the best for anomaly detection and classification in the IoT-23 dataset**.
+
+More complex algorithms like CNN and MLP: Artificial Neural Networks also don’t provide much improvement over these computationally lighter ML models. 
+
+The prediction tends to have a certain bias towards classes that have a greater number of occurrences. The problem in the detection of smaller classes lies in the fact that their proportion in the huge amount of data being used is minuscule. 
 
 
 
