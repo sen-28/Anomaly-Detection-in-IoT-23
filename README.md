@@ -25,15 +25,58 @@ The use of ML for IoT Detection is still relatively new. Although some framework
 
 The data set used in this project is **IoT-23**.
 
-The Avast AIC laboratory creates this dataset. The dataset consists of **20 malware captures** and  **3 captures for benign anomalies**. The data set contains a total of **325,307,990 captures**, of which **294,449,255 are malicious**
+The Avast AIC laboratory creates this dataset. The dataset consists of **20 malware captures** and  **3 captures for benign anomalies**. The data set contains a total of **325,307,990 captures**, of which **294,449,255 are malicious**.
 
-![alt text](https://github.com/sen-28/Vision-Transformers/blob/main/vision_images/IoT-23.png)
-.
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/mal-iot.png)
+
 Two versions of this dataset have been made available on their official site by the creators - the complete version (which contains **both pcap files** and **conn.log.labeled files**), and a lighter version (which only contains the conn.log.labeled files). 
 
-**The pcap files are the original network capture files while the conn.log.labeled files have been created by running a network analyzer on them. **
+**The pcap files are the original network capture files while the conn.log.labeled files have been created by running a network analyzer on them.**
 
 The **lighter version** was chosen since working with .pcap files proved unnecessary difficult for this project as **they created by the network capture program Wireshark** and **can only be opened using it**. 
+
+## Data Pre-Processing 
+
+### Missing Data
+
+In this dataset, missing values have already been handled. All values that were missing from any of the entries were marked with a dash (“-”). In particular, the missing values of the IP address were marked with two colons (“::”). 
+
+The NaN values were replaced by -1 to differentiate them from already present dashes in the dataset.
+
+### Data Encoding 
+
+The columns ‘**label**’ and ‘**detailed-label**’ were merged into one. They were also numerically encoded according to the following table so that they could be fed into the models:
+
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/pre.png)
+
+Thus, there are 13 classes/ labels in the dataset now according to which classification needs to be performed. These account for thirteen different types of malicious attacks.  
+
+Additionally, one hot encoding was performed for two columns: ‘**proto**’ and ‘**conn_state**’ and dummies were obtained for them. 
+
+### Dropping Irrelevant Information 
+
+Three columns: '**uid**', '**id.orig_h**', '**id.resp_h**' were also dropped since they only contain information about the ID of the capture, the IP address of the location where the attack happened, and the port that was used by the responder. While this information provides detailed identification of where the attack was detected, these columns are very weakly related to the labels. 
+
+### Statistical Correlation
+
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/stat.png)
+
+The following columns were eliminated on the basis of the Correlation Matrix: 
+**‘ts', 'local_orig', 'local_resp', 'id.orig_p', 'id.resp_p', 'service'**.
+
+The first three columns were eliminated since, on average, they were very weakly correlated to the classifier column: ‘label’. The last three columns were eliminated since they had a lot of missing values. 
+
+### Outlier Handling
+
+![alt](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/images/box.png)
+
+It is observed that the outliers only exist in one column: '**orif_ip_bytes_df**'. Thus these outliers are removed by taking values within within +3 to -3 of the standard deviation. 
+
+### Finally, all the 33 files (the data frames) are converted into one CSV file that will be fed into the algorithms and models.
+
+## Results
+
+
 
 
 
