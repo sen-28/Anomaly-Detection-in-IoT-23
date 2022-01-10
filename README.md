@@ -2,6 +2,8 @@
 
 A comparative analysis of ML and DL models on the IoT-23 dataset for anomaly detection.
 
+The entire report for this project can be found [here](https://github.com/sen-28/Anomaly-Detection-in-IoT-23/blob/main/2019A7PS0042P_SOP_Report_15Dec2021%20(1).pdf). 
+
 ## Background
 
 Anomaly detection is very similar to outlier analysis. It is a step in data mining that identifies data points, events, and observations that deviate from a dataset's normal behavior. Anomalous data can indicate critical incidents, such as technical glitches, etc. The complex networks behind IoT and its increasing applicability in solving complex and everyday challenges make it highly prone to security failure and its enormous ramifications. Hence, anomaly detection is of utmost importance in the Internet of Things. 
